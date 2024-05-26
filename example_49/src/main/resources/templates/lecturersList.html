@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Lecturers List</title>
+    <link rel="stylesheet" th:href="@{/assets/css/style-starter.css}" href="../static/assets/css/style-starter.css">
+</head>
+<body>
+    <h1>Lecturers List</h1>
+    <table>
+        <thead>
+            <tr>
+                <th>Name</th>
+                <th>Email</th>
+                <!-- Add more columns as needed -->
+            </tr>
+        </thead>
+        <tbody>
+            <!-- Iterate over the list of lecturers -->
+            <tr th:each="lecturer : ${lecturers}">
+                <td th:text="${lecturer.name}">Lecturer Name</td>
+                <td th:text="${lecturer.email}">Lecturer Email</td>
+                <!-- Add more columns as needed -->
+            </tr>
+        </tbody>
+    </table>
+    <a href="/dashboard">Back to Dashboard</a>
+</body>
+</html>
