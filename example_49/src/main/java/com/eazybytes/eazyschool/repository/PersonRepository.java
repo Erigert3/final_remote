@@ -12,4 +12,6 @@ public interface PersonRepository extends JpaRepository<Person, Integer> {
     Person readByEmail(String email);
 
     List<Person> findByRoles_RoleName(String roleName);
+
+	Person findByPersonId(int personId);
 }

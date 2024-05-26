@@ -5,6 +5,7 @@ import com.eazybytes.eazyschool.repository.CoursesRepository;
 import com.eazybytes.eazyschool.repository.EazyClassRepository;
 import com.eazybytes.eazyschool.repository.PersonRepository;
 import com.eazybytes.eazyschool.repository.RolesRepository;
+import com.eazybytes.eazyschool.service.CourseRequestService;
 import com.eazybytes.eazyschool.service.LecturerService;
 import com.eazybytes.eazyschool.service.PersonService;
 import jakarta.validation.Valid;
@@ -47,6 +48,9 @@ public class AdminController {
 
     @Autowired
     private RolesRepository roleRepository;
+
+    @Autowired
+	private CourseRequestService courseRequestService;
 
     @GetMapping("/addLecturer")
     public String showAddLecturerForm(Model model) {
@@ -307,5 +311,13 @@ public class AdminController {
                 ModelAndView("redirect:/admin/viewStudents?id="+courses.getCourseId());
         return modelAndView;
     }
+    
+    @GetMapping("/viewRequests")
+    public String viewRequests(Model model) {
+        List<CourseRequest> requests = courseRequestService.getAllRequests();
+        model.addAttribute("requests", requests);
+        return "viewRequests"; // Name of the Thymeleaf template to display the requests
+    }
+
 
 }
