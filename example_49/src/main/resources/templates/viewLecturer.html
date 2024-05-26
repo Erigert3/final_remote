@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>View Lecturer</title>
+</head>
+<body>
+    <h1>Lecturer Details</h1>
+    
+    <div th:if="${lecturer != null}">
+        <table>
+            <thead>
+                <tr>
+                    <th>Name</th>
+                    <th>Email</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td th:text="${lecturer.name}">Lecturer Name</td>
+                    <td th:text="${lecturer.email}">Lecturer Email</td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+    
+    <div th:if="${lecturer == null}">
+        <p>No lecturer assigned to this course.</p>
+    </div>
+    
+    <a href="/admin/displayCourses">Back to Courses List</a>
+</body>
+</html>

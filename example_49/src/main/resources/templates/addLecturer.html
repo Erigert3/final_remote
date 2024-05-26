@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity5">
+<head>
+    <meta charset="UTF-8">
+    <title>Add Lecturer</title>
+    <link rel="stylesheet" th:href="@{/assets/css/style-starter.css}" href="../static/assets/css/style-starter.css">
+
+</head>
+<body>
+<div class="container" sec:authorize="hasRole('ROLE_ADMIN')">
+    <h1>Add Lecturer</h1>
+    <form th:action="@{/admin/addLecturer}" th:object="${lecturer}" method="post">
+        <div class="form-group">
+            <label for="name">Name</label>
+            <input type="text" id="name" th:field="*{name}" class="form-control" placeholder="Enter name">
+            <div th:if="${#fields.hasErrors('name')}" th:errors="*{name}"></div>
+        </div>
+        <div class="form-group">
+            <label for="mobileNumber">Mobile Number</label>
+            <input type="text" id="mobileNumber" th:field="*{mobileNumber}" class="form-control" placeholder="Enter mobile number">
+            <div th:if="${#fields.hasErrors('mobileNumber')}" th:errors="*{mobileNumber}"></div>
+        </div>
+        <div class="form-group">
+            <label for="email">Email</label>
+            <input type="email" id="email" th:field="*{email}" class="form-control" placeholder="Enter email">
+            <div th:if="${#fields.hasErrors('email')}" th:errors="*{email}"></div>
+        </div>
+        <div class="form-group">
+            <label for="confirmEmail">Confirm Email</label>
+            <input type="email" id="confirmEmail" th:field="*{confirmEmail}" class="form-control" placeholder="Confirm email">
+            <div th:if="${#fields.hasErrors('confirmEmail')}" th:errors="*{confirmEmail}"></div>
+        </div>
+        <div class="form-group">
+            <label for="pwd">Password</label>
+            <input type="password" id="pwd" th:field="*{pwd}" class="form-control" placeholder="Enter password">
+            <div th:if="${#fields.hasErrors('pwd')}" th:errors="*{pwd}"></div>
+        </div>
+        <div class="form-group">
+            <label for="confirmPwd">Confirm Password</label>
+            <input type="password" id="confirmPwd" th:field="*{confirmPwd}" class="form-control" placeholder="Confirm password">
+            <div th:if="${#fields.hasErrors('confirmPwd')}" th:errors="*{confirmPwd}"></div>
+        </div>
+        <div class="form-group">
+            <label for="roles">Role</label>
+            <select id="roles" name="roles" class="form-control">
+                <option th:each="role : ${roles}"
+                        th:value="${role.roleId}"
+                        th:text="${role.roleName}"
+                        th:selected="${role.roleId == 3}"></option>
+            </select>
+        </div>
+
+
+
+
+        <div class="form-group">
+            <label for="profilePicture">Profile Picture</label>
+            <input type="text" id="profilePicture" th:field="*{profilePicture}" class="form-control" placeholder="Enter profile picture URL">
+            <div th:if="${#fields.hasErrors('profilePicture')}" th:errors="*{profilePicture}"></div>
+        </div>
+        <button type="submit" class="btn btn-primary">Add Lecturer</button>
+    </form>
+</div>
+</body>
+</html>

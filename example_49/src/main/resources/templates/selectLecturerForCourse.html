@@ -1,0 +1,17 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Select Lecturer for Course</title>
+</head>
+<body>
+    <h1>Select Lecturer for Course</h1>
+    <form th:action="@{/admin/addLecturerToCourse}" method="post">
+        <input type="hidden" name="courseId" th:value="${courseId}" />
+        <label for="lecturerId">Select Lecturer:</label>
+        <select name="lecturerId" id="lecturerId">
+            <option th:each="lecturer : ${lecturers}" th:value="${lecturer.personId}" th:text="${lecturer.name}"></option>
+        </select>
+        <button type="submit">Add Lecturer</button>
+    </form>
+</body>
+</html>
