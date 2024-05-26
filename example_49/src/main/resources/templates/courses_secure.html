@@ -71,6 +71,15 @@
 										class="control-label" for="fees">Fees</label> <input
 										type="text" class="form-control" name="fees" id="fees"
 										th:field="*{fees}" required placeholder="Enter fees">
+									<label class="control-label" for="imageUrl">Image URL</label>
+									<input type="file" class="form-control" name="imageUrl" id="imageUrl"
+										   th:field="*{picture}" required placeholder="Enter Image URL">
+									<label class="control-label" for="description">Description</label>
+									<textarea class="form-control" name="description" id="description"
+											  th:field="*{description}" required placeholder="Enter Description"
+											  maxlength="600"></textarea>
+
+
 								</div>
 							</div>
 							<div
@@ -87,6 +96,8 @@
 						<th scope="col">Course ID</th>
 						<th scope="col">Course Name</th>
 						<th scope="col">Fees</th>
+						<th scope="col">Description</th>
+						<th scope="col">Image</th>
 						<th scope="col"></th>
 					</tr>
 				</thead>
@@ -95,6 +106,8 @@
 						<td th:text="${course.courseId}"></td>
 						<td th:text="${course.name}"></td>
 						<td th:text="${course.fees}"></td>
+						<td th:text="${course.description}"></td>
+						<td><img th:src="'/assets/images/' + ${course.picture}" alt="Course Image" style="max-width: 100px;"></td>
 						<td><a
 							th:href="@{/admin/viewStudents(id=${course.courseId})}"
 							class="btn btn-warning">VIEW STUDENTS</a></td>
@@ -105,7 +118,7 @@
 							th:href="@{/admin/selectLecturerForCourse(courseId=${course.courseId})}"
 							class="btn btn-success">ADD LECTURER</a></td>
 					</tr>
- 
+
 				</tbody>
 			</table>
 		</div>

@@ -256,6 +256,7 @@ public class AdminController {
         ModelAndView modelAndView = new ModelAndView();
         coursesRepository.save(course);
         modelAndView.setViewName("redirect:/admin/displayCourses");
+
         return modelAndView;
     }
 
