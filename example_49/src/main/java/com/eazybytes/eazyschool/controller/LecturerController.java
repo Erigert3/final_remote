@@ -35,13 +35,11 @@ public class LecturerController {
         ModelAndView modelAndView = new ModelAndView("lecturer_courses.html");
 
         if (person != null) {
-            // Fetch courses assigned to the logged-in lecturer
             List<Courses> courses = coursesRepository.findByLecturerPersonId(person.getPersonId());
             modelAndView.addObject("person", person);
             modelAndView.addObject("courses", courses);
         } else {
-            // Handle case where the person is not in the session
-            modelAndView.setViewName("redirect:/login"); // Redirect to login page or handle appropriately
+            modelAndView.setViewName("redirect:/login"); 
         }
 
         return modelAndView;

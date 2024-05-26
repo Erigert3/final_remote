@@ -7,6 +7,5 @@ import com.eazybytes.eazyschool.model.CourseRequest;
 
 @Repository
 public interface CourseRequestRepository extends JpaRepository<CourseRequest, Integer> {
-    // Add custom query methods if needed
 }
 

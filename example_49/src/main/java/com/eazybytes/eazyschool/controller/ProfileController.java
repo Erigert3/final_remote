@@ -71,21 +71,14 @@ public class ProfileController {
         person.getAddress().setZipCode(profile.getZipCode());
         if (!file.isEmpty()) {
             try {
-                // Define the base directory where user photos are stored
                 String baseDir = "C:\\Users\\User\\DetyreKursi_Java\\example_49\\src\\main\\resources\\static\\assets\\images"; // Change this to your actual directory path
-                // Get the original filename
                 String originalFileName = file.getOriginalFilename();
-                // Construct the file path
                 String filePath = baseDir + File.separator + originalFileName;
-                // Create the file object
                 File dest = new File(filePath);
-                // Transfer the file bytes to the destination
                 file.transferTo(dest);
-                // Set the profile picture path in the person object
-                person.setProfilePicture(originalFileName); // Assuming profile pictures are accessible from /user-photos directory
+                person.setProfilePicture(originalFileName); 
             } catch (IOException e) {
                 e.printStackTrace();
-                // Handle the exception appropriately
             }
         }
         Person savedPerson = personRepository.save(person);

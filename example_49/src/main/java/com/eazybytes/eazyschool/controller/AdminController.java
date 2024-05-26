@@ -65,21 +65,16 @@ public class AdminController {
     public ModelAndView addLecturer(@ModelAttribute("lecturer") @Valid Person lecturer, BindingResult bindingResult, Model model) {
         ModelAndView modelAndView = new ModelAndView();
 
-        // Check for validation errors
         if (bindingResult.hasErrors()) {
-            // If there are errors, return back to the form with error messages
-            modelAndView.setViewName("addLecturer"); // Assuming the form's name is "addLecturer.html"
+            modelAndView.setViewName("addLecturer"); 
             return modelAndView;
         }
 
-        // Set roles, encode password, and save lecturer using service method
         boolean isSaved = personService.createNewLecturer(lecturer);
 
         if (isSaved) {
-            // Redirect to lecturersList page if lecturer is saved successfully
             modelAndView.setViewName("redirect:/admin/lecturersList");
         } else {
-            // Handle failure case, you can redirect to an error page or the addLecturer page
             modelAndView.setViewName("redirect:/errorPage");
         }
 
@@ -92,20 +87,16 @@ public class AdminController {
                                             HttpSession session) {
         ModelAndView modelAndView = new ModelAndView();
         
-        // Retrieve the course and lecturer from the database
         Courses course = coursesRepository.findById(courseId).orElse(null);
         Person lecturer = personRepository.findById(lecturerId).orElse(null);
         
-        // Check if both the course and lecturer exist
         if (course == null || lecturer == null) {
             modelAndView.setViewName("redirect:/admin/displayCourses?error=true");
             return modelAndView;
         }
         
-        // Add the lecturer to the course
         course.setLecturer(lecturer);
         
-        // Save the updated course
         coursesRepository.save(course);
         
         modelAndView.setViewName("redirect:/admin/displayCourses");
@@ -114,13 +105,11 @@ public class AdminController {
     
     @GetMapping("/viewLecturer")
     public String viewLecturer(@RequestParam("lecturerId") int lecturerId, Model model) {
-        // Fetch the lecturer
         Person lecturer = personRepository.findById(lecturerId).orElse(null);
 
         if (lecturer != null) {
             model.addAttribute("lecturer", lecturer);
         } else {
-            // Handle case where no lecturer is found
             model.addAttribute("lecturer", null);
         }
 
@@ -129,23 +118,20 @@ public class AdminController {
 
     @GetMapping("/selectLecturerForCourse")
     public String selectLecturerForCourse(@RequestParam("courseId") int courseId, Model model) {
-        List<Person> lecturers = personRepository.findByRoles_RoleName("LECTURER"); // Assume you have a method to get all lecturers
+        List<Person> lecturers = personRepository.findByRoles_RoleName("LECTURER");
         model.addAttribute("lecturers", lecturers);
         model.addAttribute("courseId", courseId);
-        return "selectLecturerForCourse"; // This is the name of the HTML file created above
+        return "selectLecturerForCourse"; 
     }
 
 
     
     @GetMapping("/lecturersList")
     public String getLecturersList(Model model) {
-        // Retrieve the list of persons with the role "lecturer"
         List<Person> lecturers = personRepository.findByRoles_RoleName("LECTURER");
         
-        // Add the list of lecturers to the model
         model.addAttribute("lecturers", lecturers);
         
-        // Return the "lecturersList" HTML page
         return "lecturersList";
     }
 
@@ -316,7 +302,7 @@ public class AdminController {
     public String viewRequests(Model model) {
         List<CourseRequest> requests = courseRequestService.getAllRequests();
         model.addAttribute("requests", requests);
-        return "viewRequests"; // Name of the Thymeleaf template to display the requests
+        return "viewRequests"; 
     }
 
 
